@@ -32,7 +32,7 @@ class Book
     }
 
 
-    public function getPkBook()
+    public function getPk_book()
     {
         return $this->pk_book;
     }
@@ -52,7 +52,7 @@ class Book
         $this->name = $name;
     }
 
-    public function setPkBook($pk_book)
+    public function setPk_book($pk_book)
     {
         $this->pk_book = $pk_book;
     }
@@ -70,7 +70,7 @@ class Book
     public function toXML()
     {
         $result = '<book>';
-        $result = $result . '<pk_book>' . $this->getPkBook() . '</pk_book>';
+        $result = $result . '<pk_book>' . $this->getPk_book() . '</pk_book>';
         $result = $result . '<isbn>' . $this->getIsbn() . '</isbn>';
         $result = $result . '<name>' . $this->getName() . '</name>';
         $result = $result . '<number>' . $this->getNumber() . '</number>';
