@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Exchange</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/helper/jquery.js"></script>
+    <script src="js/wrk/servicesWrk.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <br>
+            <button type="button" onclick="login()">Login</button>
+            <button type="button" onclick="newAccount()">Create New Account</button>
+        </form>
+    </div>
+
+    <script src="js/ctrl/loginCtrl.js"></script>
+</body>
+
+</html>

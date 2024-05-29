@@ -1,5 +1,5 @@
 <?php
-//Informations de connexion à la base de données
+//Data Base connection info
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'libraryexchange.emf-infopro-tpi.ch:3306');
 define('DB_NAME', 'libraryexchange_main_db');

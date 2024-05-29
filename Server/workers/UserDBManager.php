@@ -8,7 +8,7 @@
 
 class UserDBManager
 {
-    public function creatUser($user)
+    public function createUser($user)
     {
         $query = "INSERT INTO t_user (pk_user, login, password) values(NULL, :id, :password)";
         $params = array('id' => htmlentities($user->getLogin()), 'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT));
