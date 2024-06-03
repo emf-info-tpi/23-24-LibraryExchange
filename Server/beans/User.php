@@ -14,11 +14,14 @@ class User
 
     private $pk_user;
 
-    public function __construct($pk_user, $login, $password)
+    private $pk_alias;
+
+    public function __construct($pk_user, $login, $password,$pk_alias)
     {
         $this->login = $login;
         $this->password = $password;
         $this->pk_user = $pk_user;
+        $this->pk_alias = $pk_alias;
     }
 
     public function getLogin()
@@ -31,6 +34,10 @@ class User
         return $this->pk_user;
     }
 
+    public function getPkAlias(){
+        return $this->pk_alias;
+    }
+
     public function setLogin($login)
     {
         $this->login = $login;
@@ -40,6 +47,12 @@ class User
     {
         $this->pk_user = $pk_user;
     }
+
+    public function setPkAlias($pk_alias)
+    {
+        $this->pk_alias = $pk_alias;
+    }
+
 
     public function toXML()
     {
@@ -56,17 +69,8 @@ class User
         return $this->password;
     }
 
-    public function setPassword($password): self
+    public function setPassword($password)
     {
         $this->password = $password;
-        return $this;
     }
-
-    /* this implementation use a ": self"
-    public function setPassword($password): self
-    {
-        $this->password = $password;
-        return $this;
-    }
-    */
 }

@@ -9,11 +9,17 @@ function login() {
         document.getElementById("password").value,
         loginSuccess,
         loginFailure
-    )
+    );
 }
 
 function newAccount(){
     console.log("button working");
+    requestNewUser(
+        document.getElementById("username").value,
+        document.getElementById("password").value,
+        newAccountSuccess,
+        newAccountFailure
+    );
 }
 
 function loginSuccess(){
@@ -25,3 +31,10 @@ function loginFailure(){
     console.log("login failure");
 }
 
+function newAccountSuccess(){
+    console.log("new Account created!!");
+}
+
+function newAccountFailure(){
+    console.log("uhoh")
+}

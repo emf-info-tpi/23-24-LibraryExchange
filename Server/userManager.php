@@ -23,22 +23,24 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
                 if ($vars['status'] == 'new') {
                     //account creation
-                    http_response_code(406);
+
+                    if ($userDBManager->createUser(new User(null, $vars['username'], $vars['password'],null)) > 0) {
+                        http_response_code(200);
+                    } else {
+                        http_response_code(405);
+                    }
                 } elseif ($vars['status'] == 'login') {
                     //login
                     $user = $userDBManager->readUser($vars['username']);
                     if (password_verify($vars['password'], $user->getPassword())) {
-                        $wrkSession->setConnection($user->getPkUser());
+                        $wrkSession->setConnection($user->getPkAlias());
                         //echo ($wrkSession->getconnection());
                         http_response_code(200);
                     } else {
                         $wrkSession->close();
                         http_response_code(405);
                     }
-                    
-                    
                 }
-
             } else {
                 http_response_code(404);
             }

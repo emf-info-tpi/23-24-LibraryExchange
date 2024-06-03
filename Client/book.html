@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Exchange</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/helper/jquery.js"></script>
+    <script src="js/wrk/servicesWrk.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="user-library-view">
+            <h2>Book informations</h2>
+            <form id="login-form">
+                <label for="isbn">ISBN:</label>
+                <input type="text" id="isbn" name="isbn">
+                <br>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                <br>
+                <label for="number">Number:</label>
+                <input type="number" id="number" name="number">
+                <br>
+    
+            </form>
+            <button type="button" onclick="back()">Back</button>
+            <button type="button" onclick="validation()">OK</button>
+        </div>
+    </div>
+
+    <script src="js/ctrl/bookCtrl.js"></script>
+</body>
+
+</html>

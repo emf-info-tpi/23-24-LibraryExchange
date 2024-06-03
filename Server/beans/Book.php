@@ -67,6 +67,19 @@ class Book
         $this->number = $number;
     }
 
+    public function toJSON()
+    {
+        $result = '{';
+        $result = $result . '"pk_book": "' . $this->getPk_book() . '",';
+        $result = $result . '"isbn": "' . $this->getIsbn() . '",';
+        $result = $result . '"name": "' . $this->getName() . '",';
+        $result = $result . '"number": "' . $this->getNumber() . '",';
+        $result = $result . '"fk_series": "' . $this->getFk_series() . '",';
+        $result = $result . '"fk_alias": "' . $this->getFk_alias_owner() . '"';
+        $result = $result . '},';
+        return $result;
+    }
+
     public function toXML()
     {
         $result = '<book>';

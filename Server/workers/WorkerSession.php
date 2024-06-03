@@ -7,9 +7,9 @@
  */
 class WorkerSession
 {
-    public function setConnection($pk_user)
+    public function setConnection($pk_alias)
     {
-        $_SESSION['connection'] = $pk_user;
+        $_SESSION['connection'] = $pk_alias;
     }
 
     public function close()
