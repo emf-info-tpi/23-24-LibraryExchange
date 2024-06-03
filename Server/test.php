@@ -17,9 +17,9 @@ include_once('beans/User.php');
 
 $test = new UserDBManager();
 
-//$check = $test->createUser(new User(null,"mr.test","baba"));
+//$check = $test->createUser(new User(null,"mr.test","Password"));
 //$check = $test->readUser("JohnDoe")->toXML();
-//$check = $test->updateUser(new User(4,"DoeJohn","EvenSecreterPassword"));
+//$check = $test->updateUser(new User(4,"DoeJohn","hushHushSecretPassword"));
 //$check = $test->deleteUser(4);
 
 //$test = new BookDBManager();

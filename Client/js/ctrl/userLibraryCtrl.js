@@ -111,7 +111,7 @@ function exchange() {
 
     } else {
         console.log("You want to receive some books");
-
+        window.location.href = "exchange.html";
     }
 
 }

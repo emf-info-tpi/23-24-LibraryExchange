@@ -29,6 +29,11 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                     } elseif (isset($vars['pk_exchange']) and isset($vars['alias'])) {
                         $exchangeDBManager->concludeExchangeWithAlias($vars['pk_exchange'], $vars['alias']);
                         http_response_code(200);
+                    } elseif (isset($vars['pk_exchange'])
+                        /**isset($vars['action']) ?? pas pour l'instant*/
+                    ) {
+                        
+                        http_response_code(200);
                     } else {
                         http_response_code(404);
                     }
