@@ -66,10 +66,9 @@ function exchange(){
 }
 
 function exchangeSuccess(data){
-    //potential use of a local variable to change view
-    console.log(data);
+    window.location.href = "exchange.html?pk_exchange=" + encodeURIComponent(data);
 }
 
 function exchangeFailure(){
-    console.log("ouch");
+    console.log("problem with the creation of a new exchange");
 }

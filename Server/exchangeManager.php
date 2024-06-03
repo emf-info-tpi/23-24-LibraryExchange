@@ -13,14 +13,12 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
     switch ($_SERVER['REQUEST_METHOD']) {
 
         case 'POST':
-            $vars = json_decode(file_get_contents("php://input"), true);
+            $varsJSON = json_decode(file_get_contents("php://input"), true);
+            parse_str(file_get_contents("php://input"), $vars);
             if ($wrkSession->isOpen()) {
-                if (isset($vars['books'])) {
-                    $testReturn = "";
-                    foreach ($vars['books'] as $pk_book) {
-                        $testReturn .= $pk_book . " ";
-                    }
-                    echo $testReturn;
+
+                if (isset($varsJSON['books'])) {
+                    echo $exchangeDBManager->initExchange($varsJSON['books']);
                     http_response_code(200);
                 } elseif (isset($vars['pk_exchange'])) {
 
