@@ -8,13 +8,25 @@ function back() {
 }
 
 function validation() {
-    requestUpdateBookDetails(
-        document.getElementById("isbn").value,
-        document.getElementById("name").value,
-        document.getElementById("number").value,
-        updateBookDetailsSuccess,
-        updateBookDetailsFailure
-    );
+    let url = new URLSearchParams(window.location.search);
+    if (url.has('pk_book')) {
+        requestUpdateBookDetails(
+            new URLSearchParams(window.location.search).get('pk_book'),
+            document.getElementById("isbn").value,
+            document.getElementById("name").value,
+            document.getElementById("number").value,
+            updateBookDetailsSuccess,
+            updateBookDetailsFailure
+        );
+    } else {
+        requestCreateBookDetails(
+            document.getElementById("isbn").value,
+            document.getElementById("name").value,
+            document.getElementById("number").value,
+            updateBookDetailsSuccess,
+            updateBookDetailsFailure
+        );
+    }
 }
 
 function updateBookDetailsSuccess() {

@@ -32,7 +32,18 @@ function requestBooks(successCallback, errorCallback) {
   });
 }
 
-function requestUpdateBookDetails(isbn, name, number, successCallback, errorCallback) {
+function requestUpdateBookDetails(pk_book, isbn, name, number, successCallback, errorCallback) {
+  $.ajax({
+    type: "POST",
+    //dataType: "text",
+    url: BASE_URL + "bookManager.php",
+    data: "pk_book=" + pk_book + "&isbn=" + isbn + "&name=" + name + "&number=" + number,
+    success: successCallback,
+    error: errorCallback,
+  });
+}
+
+function requestCreateBookDetails(isbn, name, number, successCallback, errorCallback) {
   $.ajax({
     type: "POST",
     //dataType: "text",
@@ -43,12 +54,12 @@ function requestUpdateBookDetails(isbn, name, number, successCallback, errorCall
   });
 }
 
-function requestBookDetails(pk_book,successCallback, errorCallback) {
+function requestBookDetails(pk_book, successCallback, errorCallback) {
 
   $.ajax({
     type: "GET",
     dataType: "text",
-    url: BASE_URL + "bookManager.php?pk_book="+pk_book,
+    url: BASE_URL + "bookManager.php?pk_book=" + pk_book,
     success: successCallback,
     error: errorCallback,
   });

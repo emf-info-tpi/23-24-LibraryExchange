@@ -44,8 +44,8 @@
 
     public function updateBook($book)
     {
-        $query = "UPDATE t_book set isbn = :isbn, name = :name, number = :number, fk_series = :series, fk_alias_owner = :owner where pk_book = :pk_book";
-        $params = array('pk_book' => htmlentities($book->getPk_book()), 'name' => htmlentities($book->getName()), 'isbn' => htmlentities($book->getIsbn()), 'number' => htmlentities($book->getNumber()), 'series' => htmlentities($book->getFk_series()), 'owner' => htmlentities($book->getFk_alias_owner()));
+        $query = "UPDATE t_book set isbn = :isbn, name = :name, number = :number, fk_series = :series where pk_book = :pk_book";
+        $params = array('pk_book' => htmlentities($book->getPk_book()), 'name' => htmlentities($book->getName()), 'isbn' => htmlentities($book->getIsbn()), 'number' => htmlentities($book->getNumber()), 'series' => htmlentities($book->getFk_series()));
         $res = connexion::getInstance()->ExecuteQuery($query, $params);
         return $res;
     }
