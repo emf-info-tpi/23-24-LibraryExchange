@@ -80,7 +80,30 @@ function requestExchange(books, successCallback, errorCallback) {
     dataType: "text",
     contentType: "application/json",
     url: BASE_URL + "exchangeManager.php",
-    data: JSON.stringify({ books: books }),
+    data: JSON.stringify({ action: "exchange", books: books }),
+    success: successCallback,
+    error: errorCallback,
+  });
+}
+
+function requestExchangeWithAlias(pk_exchange, alias, successCallback, errorCallback) {
+  $.ajax({
+    type: "POST",
+    dataType: "text",
+    url: BASE_URL + "exchangeManager.php",
+    data: "pk_exchange=" + pk_exchange + "&alias=" + alias,
+    success: successCallback,
+    error: errorCallback,
+  });
+}
+
+function requestGiveBack(books, successCallback, errorCallback) {
+  $.ajax({
+    type: "POST",
+    dataType: "text",
+    contentType: "application/json",
+    url: BASE_URL + "exchangeManager.php",
+    data: JSON.stringify({ action: "giveBack", books: books }),
     success: successCallback,
     error: errorCallback,
   });

@@ -14,8 +14,9 @@ class Book
     private $number;
     private $fk_series;
     private $fk_alias_owner;
+    private $fk_alias_receiver;
 
-    public function __construct($pk_book, $isbn, $name, $number, $fk_series, $fk_alias_owner)
+    public function __construct($pk_book, $isbn, $name, $number, $fk_series, $fk_alias_owner, $fk_alias_receiver)
     {
         $this->name = $name;
         $this->pk_book = $pk_book;
@@ -23,6 +24,7 @@ class Book
         $this->fk_alias_owner = $fk_alias_owner;
         $this->isbn = $isbn;
         $this->number = $number;
+        $this->fk_alias_receiver = $fk_alias_receiver;
     }
 
 
@@ -75,7 +77,8 @@ class Book
         $result = $result . '"name": "' . $this->getName() . '",';
         $result = $result . '"number": "' . $this->getNumber() . '",';
         $result = $result . '"fk_series": "' . $this->getFk_series() . '",';
-        $result = $result . '"fk_alias": "' . $this->getFk_alias_owner() . '"';
+        $result = $result . '"fk_owner": "' . $this->getFk_alias_owner() . '",';
+        $result = $result . '"fk_receiver": "' . $this->getFk_alias_receiver() . '"';
         $result = $result . '},';
         return $result;
     }
@@ -105,10 +108,9 @@ class Book
      * @param mixed $fk_Series 
      * @return self
      */
-    public function setFk_series($fk_Series): self
+    public function setFk_series($fk_Series)
     {
         $this->fk_series = $fk_Series;
-        return $this;
     }
 
     /**
@@ -119,13 +121,22 @@ class Book
         return $this->fk_alias_owner;
     }
 
+    public function getFk_alias_receiver()
+    {
+        return $this->fk_alias_receiver;
+    }
+
     /**
      * @param mixed $fk_alias_owner 
      * @return self
      */
-    public function setFk_alias_owner($fk_alias_owner): self
+    public function setFk_alias_owner($fk_alias_owner)
     {
         $this->fk_alias_owner = $fk_alias_owner;
-        return $this;
+    }
+
+    public function setFk_alias_receiver($fk_alias_receiver)
+    {
+        $this->fk_alias_receiver = $fk_alias_receiver;
     }
 }

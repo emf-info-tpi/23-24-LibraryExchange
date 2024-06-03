@@ -10,9 +10,10 @@ $bookDBManager = new BookDBManager();
 $wrkSession = new WorkerSession();
 
 if (isset($_SERVER['REQUEST_METHOD'])) {
-    switch ($_SERVER['REQUEST_METHOD']) {
-        case 'GET':
-            if ($wrkSession->isOpen()) {
+    if ($wrkSession->isOpen()) {
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case 'GET':
+
                 if (isset($_GET['pk_book'])) {
                     //TODO make sure user is supposed to see the book
                     echo substr($bookDBManager->readBook($_GET['pk_book'])->toJSON(), 0, -1);
@@ -21,32 +22,33 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                     echo $bookDBManager->readRelatedBooks($wrkSession->getconnection());
                     http_response_code(200);
                 }
-            } else {
-                echo "you are not connected";
-                http_response_code(405);
-            }
-            break;
-        case 'POST':
-            parse_str(file_get_contents("php://input"), $vars);
-            if (isset($vars['pk_book']) and isset($vars['isbn']) and isset($vars['name']) and isset($vars['number'])) {
-                //no series for now
-                $bookDBManager->updateBook(new Book($vars['pk_book'], $vars['isbn'], $vars['name'], $vars['number'], null, $wrkSession->getconnection()));
-                http_response_code(200);
-            } elseif (isset($vars['isbn']) and isset($vars['name']) and isset($vars['number'])) {
-                //no series for now
-                $bookDBManager->createBook(new Book(null, $vars['isbn'], $vars['name'], $vars['number'], null, $wrkSession->getconnection()));
-                http_response_code(200);
-            } else {
-                http_response_code(405);
-            }
-            break;
-        case 'DELETE':
-            parse_str(file_get_contents("php://input"), $vars);
-            if (isset($vars['pk_book']) and $wrkSession->isOpen()){
-                $bookDBManager->deleteBook($vars['pk_book']);
-                http_response_code(200);
-            } else {
-                http_response_code(405);
-            }
+
+                break;
+            case 'POST':
+                parse_str(file_get_contents("php://input"), $vars);
+                if (isset($vars['pk_book']) and isset($vars['isbn']) and isset($vars['name']) and isset($vars['number'])) {
+                    //no series and no fk_receiver for now
+                    $bookDBManager->updateBook(new Book($vars['pk_book'], $vars['isbn'], $vars['name'], $vars['number'], null, $wrkSession->getconnection(),null));
+                    http_response_code(200);
+                } elseif (isset($vars['isbn']) and isset($vars['name']) and isset($vars['number'])) {
+                    //no series and no fk_receiver for now
+                    $bookDBManager->createBook(new Book(null, $vars['isbn'], $vars['name'], $vars['number'], null, $wrkSession->getconnection(),null));
+                    http_response_code(200);
+                } else {
+                    http_response_code(405);
+                }
+                break;
+            case 'DELETE':
+                parse_str(file_get_contents("php://input"), $vars);
+                if (isset($vars['pk_book'])) {
+                    $bookDBManager->deleteBook($vars['pk_book']);
+                    http_response_code(200);
+                } else {
+                    http_response_code(405);
+                }
+        }
+    } else {
+        echo "you are not connected";
+        http_response_code(405);
     }
 }

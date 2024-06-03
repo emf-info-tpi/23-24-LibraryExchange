@@ -14,11 +14,17 @@
     <div id="app">
         <h2>Exchange</h2>
         <div id="exchange">
-            <label for="alias">Alias:</label>
+            <label for="alias">Exchange with an alias:</label>
             <input type="text" id="alias" name="alias">
-            <button type="button" onclick="alias()">Validate Alias</button>
+            <button type="button" onclick="alias()" >OK</button>
+            <br/>
+            <label>OR</label>
+            <br/>
+            <label for="QR" >Exchange with a user:</label>
+            <button type="button" onclick="generateQR()">Generate QR</button>
         </div>
         <button type="button" onclick="back()">Back</button>
+        
 
     </div>
 

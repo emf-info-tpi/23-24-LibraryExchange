@@ -26,12 +26,11 @@ class UserDBManager
         $query = "SELECT * FROM t_user left join t_alias on fk_user = pk_user where login = :id";
         $params = array('id' => htmlentities($login));
         $res = connexion::getInstance()->SelectQuery($query, $params);
-        $user=new User(1,1,1,1);
-        if($res!=null){
-        $data = $res[0];
-        $user = new User($data['pk_user'], $data['login'], $data['password'],$data['pk_alias']);
+        $user = new User(1, 1, 1, 1);
+        if ($res != null) {
+            $data = $res[0];
+            $user = new User($data['pk_user'], $data['login'], $data['password'], $data['pk_alias']);
         }
         return $user;
     }
 }
-?>

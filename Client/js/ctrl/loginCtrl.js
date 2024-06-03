@@ -12,7 +12,7 @@ function login() {
     );
 }
 
-function newAccount(){
+function newAccount() {
     console.log("button working");
     requestNewUser(
         document.getElementById("username").value,
@@ -22,19 +22,20 @@ function newAccount(){
     );
 }
 
-function loginSuccess(){
+function loginSuccess(data) {
     console.log("login success!");
+    localStorage.setItem('currentUser', data);
     window.location.href = "userLibrary.html";
 }
 
-function loginFailure(){
+function loginFailure() {
     console.log("login failure");
 }
 
-function newAccountSuccess(){
+function newAccountSuccess() {
     console.log("new Account created!!");
 }
 
-function newAccountFailure(){
+function newAccountFailure() {
     console.log("uhoh")
 }

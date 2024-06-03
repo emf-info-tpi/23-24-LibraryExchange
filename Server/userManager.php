@@ -34,7 +34,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                     $user = $userDBManager->readUser($vars['username']);
                     if (password_verify($vars['password'], $user->getPassword())) {
                         $wrkSession->setConnection($user->getPkAlias());
-                        //echo ($wrkSession->getconnection());
+                        echo ($wrkSession->getconnection());
                         http_response_code(200);
                     } else {
                         $wrkSession->close();

@@ -10,25 +10,35 @@ $exchangeDBManager = new ExchangeDBManager();
 $wrkSession = new WorkerSession();
 
 if (isset($_SERVER['REQUEST_METHOD'])) {
-    switch ($_SERVER['REQUEST_METHOD']) {
+    if ($wrkSession->isOpen()) {
+        switch ($_SERVER['REQUEST_METHOD']) {
 
-        case 'POST':
-            $varsJSON = json_decode(file_get_contents("php://input"), true);
-            parse_str(file_get_contents("php://input"), $vars);
-            if ($wrkSession->isOpen()) {
+            case 'POST':
+                $varsJSON = json_decode(file_get_contents("php://input"), true);
+                parse_str(file_get_contents("php://input"), $vars);
+                if ($wrkSession->isOpen()) {
 
-                if (isset($varsJSON['books'])) {
-                    echo $exchangeDBManager->initExchange($varsJSON['books']);
-                    http_response_code(200);
-                } elseif (isset($vars['pk_exchange'])) {
-
-                    http_response_code(200);
+                    if (isset($varsJSON['books']) and isset($varsJSON['action'])) {
+                        if ($varsJSON['action'] == 'exchange') {
+                            echo $exchangeDBManager->initExchange($varsJSON['books']);
+                            http_response_code(200);
+                        } elseif ($varsJSON['action'] == 'giveBack') {
+                            $exchangeDBManager->giveBackBooks($varsJSON['books']);
+                            http_response_code(200);
+                        }
+                    } elseif (isset($vars['pk_exchange']) and isset($vars['alias'])) {
+                        $exchangeDBManager->concludeExchangeWithAlias($vars['pk_exchange'], $vars['alias']);
+                        http_response_code(200);
+                    } else {
+                        http_response_code(404);
+                    }
                 } else {
-                    http_response_code(404);
+                    http_response_code(405);
                 }
-            } else {
-                http_response_code(405);
-            }
-            break;
+                break;
+        }
+    } else {
+        echo "you are not connected";
+        http_response_code(405);
     }
 }

@@ -1,4 +1,4 @@
-body {
+/*body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -16,7 +16,33 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 10px;
+    padding: 10px;
+}
 
 h2 {
     margin-top: 0;
+}
+
+.book {
+    border-radius: 5px;
+    border-color: black;
+    border-width: 0.2px;
+    border-style: solid;
+    margin-bottom: 2px;
+}
+
+.owned {
+    background-color: aquamarine;
+}
+
+.received {
+    background-color: aqua;
+}
+
+.exchanged {
+    background-color: rgb(228, 200, 245);
 }

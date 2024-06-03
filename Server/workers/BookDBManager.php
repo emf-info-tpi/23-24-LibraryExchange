@@ -22,7 +22,8 @@
         $params = array('pk_book' => $pk_book);
         //TODO add try and catch for proper error handling
         $res = connexion::getInstance()->SelectSingleQuery($query,$params);
-        $book = new Book($pk_book, $res['isbn'], $res['name'], $res['number'], $res['fk_series'], $res['fk_alias_owner']);
+        //TODo change null for the real fk_receiver
+        $book = new Book($pk_book, $res['isbn'], $res['name'], $res['number'], $res['fk_series'], $res['fk_alias_owner'],null);
         return $book;
     }
 
@@ -33,7 +34,7 @@
         $res = connexion::getInstance()->SelectQuery($query,$params);
         $books = '{"books": [';
         foreach ($res as $data) {
-            $book = new Book($data['pk_book'], $data['isbn'], $data['name'], $data['number'], $data['fk_series'], $pk_alias);
+            $book = new Book($data['pk_book'], $data['isbn'], $data['name'], $data['number'], $data['fk_series'], $pk_alias,$data['fk_alias_receiver']);
             $books .= $book->toJSON();
         }
         //TODO find a way to create proper json if no book

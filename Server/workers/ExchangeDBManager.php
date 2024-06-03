@@ -23,13 +23,41 @@ class ExchangeDBManager
         return $pk_exchange;
     }
 
-    public function concludeExchange($pk_exchange, $pk_alias)
+    public function concludeExchangeWithAlias($pk_exchange, $alias)
     {
-        return true;
+        $query = "INSERT INTO t_alias (pk_alias, name, fk_user) values(NULL, :id, NULL)";
+        $params = array('id' => htmlentities($alias));
+        connexion::getInstance()->ExecuteQuery($query, $params);
+
+        $query = "UPDATE t_exchange SET fk_alias_receiver = :alias, date_exchange = NOW() WHERE pk_exchange = :pk_exchange";
+        $params = array('alias' => connexion::getInstance()->GetLastId('t_alias'), 'pk_exchange' => htmlentities($pk_exchange));
+        connexion::getInstance()->ExecuteQuery($query, $params);
+
+        $this->updateBooksCurrentExchange($pk_exchange);
+    }
+
+    private function updateBooksCurrentExchange($pk_exchange)
+    {
+        $query = "UPDATE t_book b
+        JOIN tr_exchange_book teb ON b.pk_book = teb.pfk_book
+        SET b.fk_exchange_current = teb.pfk_exchange
+        WHERE teb.pfk_exchange = :exchange;
+        ";
+        $params = array('exchange' => htmlentities($pk_exchange));
+        connexion::getInstance()->ExecuteQuery($query, $params);
     }
 
     public function createExchange($books, $pk_alias)
     {
         return true;
+    }
+
+    public function giveBackBooks($books)
+    {
+        foreach ($books as $pk_book) {
+            $query = "UPDATE t_book SET fk_exchange_current = NULL WHERE pk_book = :book";
+            $params = array('book' => htmlentities($pk_book));
+            connexion::getInstance()->ExecuteQuery($query, $params);
+        }
     }
 }
