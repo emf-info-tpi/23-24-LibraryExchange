@@ -40,5 +40,13 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 http_response_code(405);
             }
             break;
+        case 'DELETE':
+            parse_str(file_get_contents("php://input"), $vars);
+            if (isset($vars['pk_book']) and $wrkSession->isOpen()){
+                $bookDBManager->deleteBook($vars['pk_book']);
+                http_response_code(200);
+            } else {
+                http_response_code(405);
+            }
     }
 }

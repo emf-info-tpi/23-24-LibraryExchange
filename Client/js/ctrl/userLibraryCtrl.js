@@ -1,3 +1,5 @@
+let selectedBooks = [];
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("user is connected");
     requestBooks(
@@ -14,9 +16,9 @@ function addBook() {
     window.location.href = "book.html";
 }
 
-function updateBook(pk_book){
+function updateBook(pk_book) {
     console.log(pk_book);
-    window.location.href = "book.html?pk_book="+encodeURIComponent(pk_book);
+    window.location.href = "book.html?pk_book=" + encodeURIComponent(pk_book);
 }
 
 function getBooksSuccess(data) {
@@ -28,11 +30,24 @@ function showBooks(books) {
     let bookView = "";
     for (let i = 0; i < books.length; i++) {
         let book = books[i];
-        bookView += '<div><input type="checkbox" id="' + book.pk_book + '" name="' + book.name + '" /><label for="' + book.name + '" onclick="updateBook('+book.pk_book+')">' + book.name + ' n° ' + book.number + '</label></div>'
+        bookView += '<div><input type="checkbox" id="chk' + book.pk_book + '" onclick="check(' + book.pk_book + ')" /><label for="' + book.name + '" onclick="updateBook(' + book.pk_book + ')">' + book.name + ' n° ' + book.number + '</label></div>'
     }
     document.getElementById("book-list").innerHTML = bookView;
 }
 
 function getBooksFailure() {
     console.log("We were not able to find this user's Alias");
+}
+
+function check(pk_book) {
+    let checkBox = document.getElementById("chk" + pk_book);
+    if (checkBox.checked) {
+        console.log(pk_book + " is checked");
+        selectedBooks.push(pk_book);
+    } else {
+        console.log(pk_book + " is unchecked");
+        let index = selectedBooks.indexOf(pk_book);
+        selectedBooks.splice(index,1);
+    }
+    console.log(selectedBooks);
 }

@@ -64,3 +64,14 @@ function requestBookDetails(pk_book, successCallback, errorCallback) {
     error: errorCallback,
   });
 }
+
+function requestDeleteBook(pk_book, successCallback, errorCallback) {
+
+  $.ajax({
+    type: "DELETE",
+    url: BASE_URL + "bookManager.php",
+    data: "pk_book=" + pk_book,
+    success: successCallback,
+    error: errorCallback,
+  });
+}
