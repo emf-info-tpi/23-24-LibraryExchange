@@ -35,7 +35,6 @@ function requestBooks(successCallback, errorCallback) {
 function requestUpdateBookDetails(pk_book, isbn, name, number, successCallback, errorCallback) {
   $.ajax({
     type: "POST",
-    //dataType: "text",
     url: BASE_URL + "bookManager.php",
     data: "pk_book=" + pk_book + "&isbn=" + isbn + "&name=" + name + "&number=" + number,
     success: successCallback,
@@ -46,7 +45,6 @@ function requestUpdateBookDetails(pk_book, isbn, name, number, successCallback, 
 function requestCreateBookDetails(isbn, name, number, successCallback, errorCallback) {
   $.ajax({
     type: "POST",
-    //dataType: "text",
     url: BASE_URL + "bookManager.php",
     data: "isbn=" + isbn + "&name=" + name + "&number=" + number,
     success: successCallback,
@@ -71,6 +69,18 @@ function requestDeleteBook(pk_book, successCallback, errorCallback) {
     type: "DELETE",
     url: BASE_URL + "bookManager.php",
     data: "pk_book=" + pk_book,
+    success: successCallback,
+    error: errorCallback,
+  });
+}
+
+function requestExchange(books, successCallback, errorCallback) {
+  $.ajax({
+    type: "POST",
+    dataType: "text",
+    contentType: "application/json",
+    url: BASE_URL + "exchangeManager.php",
+    data: JSON.stringify({ books: books }),
     success: successCallback,
     error: errorCallback,
   });

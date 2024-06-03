@@ -42,12 +42,34 @@ function getBooksFailure() {
 function check(pk_book) {
     let checkBox = document.getElementById("chk" + pk_book);
     if (checkBox.checked) {
-        console.log(pk_book + " is checked");
         selectedBooks.push(pk_book);
     } else {
-        console.log(pk_book + " is unchecked");
         let index = selectedBooks.indexOf(pk_book);
         selectedBooks.splice(index,1);
     }
     console.log(selectedBooks);
+}
+
+function exchange(){
+    if (selectedBooks.length){
+        console.log("You want to exchange the following: "+selectedBooks);
+        requestExchange(
+            selectedBooks,
+            exchangeSuccess,
+            exchangeFailure
+        );
+    } else {
+        console.log("You want to receive some books");
+
+    }
+
+}
+
+function exchangeSuccess(data){
+    //potential use of a local variable to change view
+    console.log(data);
+}
+
+function exchangeFailure(){
+    console.log("ouch");
 }
