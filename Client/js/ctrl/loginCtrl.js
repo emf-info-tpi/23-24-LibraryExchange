@@ -14,12 +14,14 @@ function login() {
 
 function newAccount() {
     console.log("button working");
-    requestNewUser(
-        document.getElementById("username").value,
-        document.getElementById("password").value,
-        newAccountSuccess,
-        newAccountFailure
-    );
+    if (confirm("Confirm the creation of a New Account.") == true) {
+        requestNewUser(
+            document.getElementById("username").value,
+            document.getElementById("password").value,
+            newAccountSuccess,
+            newAccountFailure
+        );
+    }
 }
 
 function loginSuccess(data) {

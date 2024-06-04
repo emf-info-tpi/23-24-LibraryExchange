@@ -92,18 +92,20 @@ function exchange() {
                 );
                 break;
             case "exchanged":
-                console.log("You want to have " + selectedBooks + " back")
-                requestGiveBack(
-                    selectedBooks,
-                    GiveBackSuccess,
-                    GiveBackFailure
-                )
+                if (confirm("Are you sure that all these Books are back?") == true) {
+                    console.log("You want to have " + selectedBooks + " back")
+                    requestGiveBack(
+                        selectedBooks,
+                        GiveBackSuccess,
+                        GiveBackFailure
+                    )
+                }
                 break;
             case "received":
-                console.log("You want to exchange the following: " + selectedBooks + " that aren't yours");
+                alert("You can not Exchange Books that you don't own.");
                 break;
             case "mixed":
-                console.log("You want to do to much things at the same time");
+                alert("Choose only one type of Exchange please.");
                 break;
             default:
                 console.log("I don't even know what you are trying to do");
@@ -121,14 +123,14 @@ function exchangeSuccess(data) {
 }
 
 function exchangeFailure() {
-    console.log("problem with the creation of a new exchange");
+    alert("Unable to create a new Exchange!");
 }
 
 function GiveBackSuccess() {
-    console.log("Your books are back!!");
+    alert("Your Books are Back!");
     window.location.href = "userLibrary.html";
 }
 
 function GiveBackFailure() {
-    console.log("your books are not yours anymore...");
+    alert("We are not able change the Status of your Books!");
 }

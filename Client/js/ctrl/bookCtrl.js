@@ -16,14 +16,16 @@ function back() {
 function validation() {
     let url = new URLSearchParams(window.location.search);
     if (url.has('pk_book')) {
-        requestUpdateBookDetails(
-            url.get('pk_book'),
-            document.getElementById("isbn").value,
-            document.getElementById("name").value,
-            document.getElementById("number").value,
-            updateBookDetailsSuccess,
-            updateBookDetailsFailure
-        );
+        if (confirm("Confirm the Update of this Book.") == true) {
+            requestUpdateBookDetails(
+                url.get('pk_book'),
+                document.getElementById("isbn").value,
+                document.getElementById("name").value,
+                document.getElementById("number").value,
+                updateBookDetailsSuccess,
+                updateBookDetailsFailure
+            );
+        }
     } else {
         requestCreateBookDetails(
             document.getElementById("isbn").value,
@@ -57,19 +59,21 @@ function bookDetailsFailure() {
 function deleteBook() {
     let url = new URLSearchParams(window.location.search);
     if (url.has('pk_book')) {
-        requestDeleteBook(
-            url.get('pk_book'),
-            deleteBookSuccess,
-            deleteBookFailure
-        );
+        if (confirm("Are you sure you want to Delete this Book?") == true) {
+            requestDeleteBook(
+                url.get('pk_book'),
+                deleteBookSuccess,
+                deleteBookFailure
+            );
+        }
     }
 
-    function deleteBookSuccess(){
+    function deleteBookSuccess() {
         window.location.href = "userLibrary.html";
         console.log('the book has been deleted');
     }
 
-    function deleteBookFailure(){
+    function deleteBookFailure() {
         console.log('THIS BOOK IS IMORTAL');
     }
 }

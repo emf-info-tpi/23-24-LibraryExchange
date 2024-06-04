@@ -32,33 +32,38 @@ function back() {
 function alias() {
     let url = new URLSearchParams(window.location.search);
     if (url.has('pk_exchange')) {
-        requestExchangeWithAlias(
-            url.get('pk_exchange'),
-            document.getElementById("alias").value,
-            exchangeWithAliasSuccess,
-            exchangeWithAliasFailure
-        );
+        if (confirm("Confirm the Exchange with " + document.getElementById("alias").value) == true) {
+            requestExchangeWithAlias(
+                url.get('pk_exchange'),
+                document.getElementById("alias").value,
+                exchangeWithAliasSuccess,
+                exchangeWithAliasFailure
+            );
+        }
     }
 }
 
 function exchangeWithAliasSuccess() {
-    console.log("exchange is working!!");
+    alert("Exchange Success!");
     window.location.href = "userLibrary.html";
 
 }
 
 function exchangeWithAliasFailure() {
-    console.log("exchange returned an error");
+    alert("Exchange Failure!");
+    window.location.href = "userLibrary.html";
 }
 
 function onScanSuccess(decodedText, decodedResult) {
     // handle the scanned code as you like, for example:
-    console.log(`Code matched = `+decodedText);
-    requestValidateExchange(
-        decodedText,
-        validateExchangeSuccess,
-        validateExchangeFailure
-    )
+    console.log(`Code matched = ` + decodedText);
+    if (confirm("Confirm the Exchange.") == true) {
+        requestValidateExchange(
+            decodedText,
+            validateExchangeSuccess,
+            validateExchangeFailure
+        )
+    }
 }
 
 function onScanFailure(error) {
@@ -67,12 +72,14 @@ function onScanFailure(error) {
     console.warn(`Code scan error = ${error}`);
 }
 
-function validateExchangeSuccess(){
-    console.log("Exchange with QR SUCCESS");
+function validateExchangeSuccess() {
+    alert("Exchange Success!");
+    window.location.href = "userLibrary.html";
 }
 
-function validateExchangeFailure(){
-    console.log("Exchange with QR FAILURE");
+function validateExchangeFailure() {
+    alert("Exchange Failure!");
+    window.location.href = "userLibrary.html";
 }
 
 /* deprecated due to using a get in the image
