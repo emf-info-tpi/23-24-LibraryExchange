@@ -15,12 +15,9 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 if (isset($_GET['pk_exchange'])) {
-                    ob_start("callback");
-
                     $debugLog = ob_get_contents();
                     ob_end_clean();
-
-                    QRcode::png($_GET['pk_exchange']);
+                    QRcode::png("https://libraryexchange.emf-infopro-tpi.ch/23-24-LibraryExchange/Client/?" . $_GET['pk_exchange']);
                 } else {
                     http_response_code(404);
                 }
@@ -41,12 +38,12 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                     $exchangeDBManager->concludeExchangeWithAlias($vars['pk_exchange'], $vars['alias']);
                     http_response_code(200);
                 } elseif (isset($vars['pk_exchange'])) {
-                    $exchangeDBManager->concludeExchange($vars['pk_exchange'], $wrkSession->getconnection());
+                    $pk_exchange = substr($vars['pk_exchange'], strpos($vars['pk_exchange'], "?") + 1);
+                    $exchangeDBManager->concludeExchange($pk_exchange, $wrkSession->getconnection());
                     http_response_code(200);
                 } else {
                     http_response_code(404);
                 }
-
                 break;
         }
     } else {

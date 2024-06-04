@@ -6,7 +6,7 @@
  * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
  */
 
- class BookDBManager
+class BookDBManager
 {
     public function createBook($book)
     {
@@ -21,9 +21,9 @@
         $query = "SELECT * FROM t_book WHERE pk_book = :pk_book";
         $params = array('pk_book' => $pk_book);
         //TODO add try and catch for proper error handling
-        $res = connexion::getInstance()->SelectSingleQuery($query,$params);
+        $res = connexion::getInstance()->SelectSingleQuery($query, $params);
         //TODo change null for the real fk_receiver
-        $book = new Book($pk_book, $res['isbn'], $res['name'], $res['number'], $res['fk_series'], $res['fk_alias_owner'],null);
+        $book = new Book($pk_book, $res['isbn'], $res['name'], $res['number'], $res['fk_series'], $res['fk_alias_owner'], null);
         return $book;
     }
 
@@ -35,14 +35,14 @@
         WHERE fk_alias_owner = :alias 
         OR ex.fk_alias_receiver = :alias";
         $params = array('alias' => htmlentities($pk_alias));
-        $res = connexion::getInstance()->SelectQuery($query,$params);
+        $res = connexion::getInstance()->SelectQuery($query, $params);
         $books = '{"books": [';
         foreach ($res as $data) {
-            $book = new Book($data['pk_book'], $data['isbn'], $data['name'], $data['number'], $data['fk_series'], $pk_alias,$data['fk_alias_receiver']);
+            $book = new Book($data['pk_book'], $data['isbn'], $data['name'], $data['number'], $data['fk_series'], $data['fk_alias_owner'], $data['fk_alias_receiver']);
             $books .= $book->toJSON();
         }
         //TODO find a way to create proper json if no book
-        $books = substr($books,0,-1).']}';
+        $books = substr($books, 0, -1) . ']}';
         //$books .= ']}';
         return $books;
     }
@@ -63,4 +63,3 @@
         return $res;
     }
 }
-?>
