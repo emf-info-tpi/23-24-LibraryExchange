@@ -22,8 +22,6 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             if (isset($vars['username']) and isset($vars['password']) and isset($vars['status'])) {
 
                 if ($vars['status'] == 'new') {
-                    //account creation
-
                     if ($userDBManager->createUser(new User(null, $vars['username'], $vars['password'],null)) > 0) {
                         http_response_code(200);
                     } else {

@@ -29,7 +29,11 @@
 
     public function readRelatedBooks($pk_alias)
     {
-        $query = "SELECT * from t_book book LEFT JOIN t_exchange ex ON book.fk_exchange_current = ex.pk_exchange WHERE fk_alias_owner = :alias OR ex.fk_alias_receiver = :alias";
+        $query = "SELECT * from t_book book 
+        LEFT JOIN t_exchange ex 
+        ON book.fk_exchange_current = ex.pk_exchange 
+        WHERE fk_alias_owner = :alias 
+        OR ex.fk_alias_receiver = :alias";
         $params = array('alias' => htmlentities($pk_alias));
         $res = connexion::getInstance()->SelectQuery($query,$params);
         $books = '{"books": [';

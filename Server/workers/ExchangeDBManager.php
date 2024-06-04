@@ -29,8 +29,14 @@ class ExchangeDBManager
         $params = array('id' => htmlentities($alias));
         connexion::getInstance()->ExecuteQuery($query, $params);
 
+        $this->concludeExchange($pk_exchange, connexion::getInstance()->GetLastId('t_alias'));
+        
+    }
+
+    public function concludeExchange($pk_exchange, $alias)
+    {
         $query = "UPDATE t_exchange SET fk_alias_receiver = :alias, date_exchange = NOW() WHERE pk_exchange = :pk_exchange";
-        $params = array('alias' => connexion::getInstance()->GetLastId('t_alias'), 'pk_exchange' => htmlentities($pk_exchange));
+        $params = array('alias' => $alias, 'pk_exchange' => htmlentities($pk_exchange));
         connexion::getInstance()->ExecuteQuery($query, $params);
 
         $this->updateBooksCurrentExchange($pk_exchange);

@@ -109,12 +109,11 @@ function requestGiveBack(books, successCallback, errorCallback) {
   });
 }
 
-function requestGenerateQR(pk_exchange, successCallback, errorCallback) {
+function requestValidateExchange(pk_exchange, successCallback, errorCallback) {
   $.ajax({
     type: "POST",
-    //dataType: "text",
     url: BASE_URL + "exchangeManager.php",
-    data: "action=generateQR&pk_exchange=" + pk_exchange,
+    data: "pk_exchange=" + pk_exchange,
     success: successCallback,
     error: errorCallback,
   });
