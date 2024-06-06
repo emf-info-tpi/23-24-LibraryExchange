@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This is a test file that will not be in the final version of this app
+ * This is a test file
  * @version 1.0
  * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
  */

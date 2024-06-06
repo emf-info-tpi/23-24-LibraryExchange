@@ -1,3 +1,8 @@
+/**
+ * script userLibraryCtrl
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
 let selectedBooks = [];
 const currentUser = localStorage.getItem('currentUser');
 document.addEventListener("DOMContentLoaded", () => {

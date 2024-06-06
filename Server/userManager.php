@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * script userManager
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
+
 session_start();
 include_once('workers/UserDBManager.php');
 include_once('workers/Connexion.php');

@@ -1,3 +1,8 @@
+/**
+ * script loginCtrl
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
 document.addEventListener("DOMContentLoaded", () => {
     console.log("page is loaded");
 })
@@ -31,13 +36,13 @@ function loginSuccess(data) {
 }
 
 function loginFailure() {
-    console.log("login failure");
+    alert("Login Failure.");
 }
 
 function newAccountSuccess() {
-    console.log("new Account created!!");
+    alert("New Account Created!");
 }
 
 function newAccountFailure() {
-    console.log("uhoh")
+    alert("Creating New Account Failure.");
 }

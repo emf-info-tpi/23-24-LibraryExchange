@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * script bookManager
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
+
 session_start();
 include_once('workers/BookDBManager.php');
 include_once('workers/Connexion.php');

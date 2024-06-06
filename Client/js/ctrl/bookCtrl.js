@@ -1,3 +1,8 @@
+/**
+ * script bookCtrl
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
 document.addEventListener("DOMContentLoaded", () => {
     console.log("page is loaded");
     let url = new URLSearchParams(window.location.search);

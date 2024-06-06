@@ -1,3 +1,8 @@
+/**
+ * script servicesWrk
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
 var BASE_URL = "http://localhost/23-24-LibraryExchange/Server/";
 
 function requestLogin(username, password, successCallback, errorCallback) {

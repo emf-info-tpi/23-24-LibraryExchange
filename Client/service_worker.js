@@ -1,3 +1,8 @@
+/**
+ * script exchangeCtrl
+ * @version 1.0
+ * @author Guillaume Dougoud <guillaume.dougoud@studentfr.ch>
+ */
 // Cached core static resources 
 self.addEventListener("install", e => {
     e.waitUntil(
